@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/Arqui2_Taller_1.dir/main.c.o  -o Arqui2_Taller_1 
