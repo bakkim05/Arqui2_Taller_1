@@ -3,8 +3,9 @@
 #include <unistd.h>
 #include <pthread.h>
 
-int array1[0];
-int array2[0];
+int end = 100;
+int array1[99];
+int array2[99];
 
 int intToAscii(int number) {
     return '0' + number;
@@ -12,33 +13,48 @@ int intToAscii(int number) {
 
 void *firstThread(void *vargp)
 {
-    srand(time(0)+10);
-    sleep(10/1000);
-    array1[0]= rand()%256;
-    printf("array1: %d\n",array1[0]);
+    int k = 0;
+    while(k<end){
+        array1[k]= rand()%256;
+        k++;
+        sleep(10/1000);
+    }
     return NULL;
 }
 
 void *secondThread(void *vargp)
 {
-    srand(time(0));
-    sleep(5/1000);
-    array2[0]= rand()%256;
-    printf("array2: %d\n",array2[0]);
+    int j = 0;
+    while(j<end){
+        array2[j]= rand()%256;
+        j++;
+        sleep(5/1000);
+    }
+    return NULL;
+}
+
+void *thirdThread(void *vargp)
+{
+    int p = 0;
+    while(p<end){
+        printf("array1[%d]: %d\n", p, array1[p]);
+        printf("array2[%d]: %d\n", p, array2[p]);
+        printf("XOR valor de array1 y array2: %c\n", intToAscii(array1[p]^array2[p]));
+        p++;
+        sleep(10/1000);
+    }
     return NULL;
 }
 
 int main()
 {
-    
-    pthread_t thread_id;
-    for (int i=0; i<10; i++){
-        pthread_create(&thread_id, NULL, firstThread, NULL);
-        pthread_create(&thread_id, NULL, secondThread, NULL);
-        pthread_join(thread_id, NULL);
-        printf("valor final array1: %d\n",array1[0]);
-        printf("valor final array2: %d\n",array2[0]);
-        printf("XOR del array1 y array2: %c\n", intToAscii(array1[0]^array2[0]));
-    }
+    srand(time(NULL));
+    pthread_t thread_id[2];
+    pthread_create(&thread_id[0], NULL, firstThread, NULL);
+    pthread_create(&thread_id[1], NULL, secondThread, NULL);
+    pthread_create(&thread_id[2], NULL, thirdThread, NULL);
+    pthread_join(thread_id[0], NULL);
+    pthread_join(thread_id[1], NULL);
+    pthread_join(thread_id[2], NULL);
     exit(0);
 }
