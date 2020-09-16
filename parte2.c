@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <pthread.h>
 
-pthread_t thread_id[1];
+pthread_t thread_id[2];
 pthread_mutex_t lock;
 int process;
 
