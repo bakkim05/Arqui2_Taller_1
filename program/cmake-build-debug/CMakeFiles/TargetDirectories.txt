@@ -1,3 +1,0 @@
-/home/jung/Desktop/REPOS/Arqui2_Taller_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/jung/Desktop/REPOS/Arqui2_Taller_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/jung/Desktop/REPOS/Arqui2_Taller_1/cmake-build-debug/CMakeFiles/Arqui2_Taller_1.dir
